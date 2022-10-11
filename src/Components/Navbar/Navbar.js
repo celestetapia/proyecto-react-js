@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../assets/logo.webp";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { styles } from "./Navbar.style";
+import CartWidget from "../CartWidget/CartWidget";
 
 const Navbar = ({ nombreUsuario}) => {
 
@@ -28,8 +28,7 @@ const Navbar = ({ nombreUsuario}) => {
             })
           }
         </ul>
-        
-        <ShoppingCartIcon color="ligth" fontSize="large"/>
+        <CartWidget/>
       </div>
     </nav>
   );
