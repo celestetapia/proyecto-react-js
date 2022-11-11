@@ -2,29 +2,33 @@ import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
 import { styles } from "./ItemListContainer.style";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+
 
 export const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   
   const { id } = useParams();
+  const db = getFirestore();
 
-  const URL_BASE = 'https://fakestoreapi.com/products'
-  const URL_CAT = `${URL_BASE}/category/${id}`
+  const prodCollection = collection(db, "items");
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await fetch(id ? URL_CAT : URL_BASE);
-        const data = await res.json();
-        setProducts(data);
-      } catch {
-        console.log("error");
-      } finally {
-        setLoading(false);
-      }
-    };
-    getProducts();
+
+    getDocs(prodCollection)
+    .then((result) => {
+      const listProducts = result.docs.map((item) => {
+        return {
+          ...item.data(),
+          id: item.id        };
+      });
+      setProducts(listProducts);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(setLoading(false));
 
   }, [id]);
 

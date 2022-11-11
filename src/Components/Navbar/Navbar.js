@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import logo from "../../assets/logo.webp";
 import { CartWidget } from "../CartWidget/CartWidget";
 import { styles } from "./Navbar.style";
@@ -6,10 +6,9 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const categorias = [
-    { nombre: "electronics", id: 0, ruta: "/categoria/electronics" },
-    { nombre: "jewelery", id: 1, ruta: "/categoria/jewelery" },
-    { nombre: "men's clothing", id: 2, ruta: "/categoria/men's clothing" },
-    { nombre: "women's clothing", id: 3, ruta: "/categoria/women's clothing" },
+    { nombre: "Hombre", id: 0, ruta: "/categoria/hombre" },
+    { nombre: "Mujer", id: 1, ruta: "/categoria/mujer" },
+    { nombre: "Niños", id: 2, ruta: "/categoria/ninos" },
   ];
 
   return (
