@@ -8,7 +8,7 @@ const Navbar = () => {
   const categorias = [
     { nombre: "Hombre", id: 0, ruta: "/categoria/hombre" },
     { nombre: "Mujer", id: 1, ruta: "/categoria/mujer" },
-    { nombre: "Niños", id: 2, ruta: "/categoria/ninos" },
+    { nombre: "Niños", id: 2, ruta: "/categoria/niños" },
   ];
 
   return (

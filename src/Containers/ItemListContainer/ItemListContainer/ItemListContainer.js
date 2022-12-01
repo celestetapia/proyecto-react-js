@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
 import { styles } from "./ItemListContainer.style";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 
 export const ItemListContainer = ({ greeting }) => {
@@ -13,15 +13,22 @@ export const ItemListContainer = ({ greeting }) => {
   const db = getFirestore();
 
   const prodCollection = collection(db, "items");
+  let collectionQuery;
+
+  if (id){
+    collectionQuery = query(prodCollection, where('categoryId', '==', id));
+  } else {
+    collectionQuery = query(prodCollection);
+  }
 
   useEffect(() => {
-
-    getDocs(prodCollection)
+    getDocs(collectionQuery)
     .then((result) => {
       const listProducts = result.docs.map((item) => {
         return {
           ...item.data(),
-          id: item.id        };
+          id: item.id        
+        };
       });
       setProducts(listProducts);
     })
